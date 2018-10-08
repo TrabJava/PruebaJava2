@@ -13,7 +13,6 @@
     </head>
     <body>
         <jsp:include page="../../Menú/menuAdministrador.jsp"></jsp:include>
-        <h1>Hello World!</h1>
         <div class="row centered-form">
             <div class="row">
                 <form action="procesoSuperUsuario" method="GET">
