@@ -40,5 +40,6 @@ public class SuperUsuarioFacade extends AbstractFacade<SuperUsuario> {
         query.setParameter("id", id);
         return query.getResultList().size() > 0;
     }
+     
     
 }
