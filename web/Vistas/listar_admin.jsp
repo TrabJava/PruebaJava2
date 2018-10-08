@@ -23,10 +23,7 @@
 
         <%--Query para mostrar los datos en la lista--%>
         <sql:query dataSource = "${snapshot}" var = "admin">
-            SELECT * FROM super_usuario su
-            JOIN tipo_super tu ON su.tipo=tu.id 
-            JOIN estado_super es ON su.estado= es.id  
-            WHERE su.tipo=2
+            SELECT su.id,su.user,su.pass,t.descripcion_tipo,e.descripcion FROM super_usuario su JOIN estado_super e on su.estado = e.id JOIN tipo_super t on t.id = su.tipo where su.tipo = 2;
         </sql:query>
         <jsp:include page="../Menú/menuSuperU.jsp"></jsp:include>
 
@@ -39,21 +36,26 @@
                     <div class="col-lg-4">
                         <table>
                             <tr>
-                                <th>ID USUARIO</th>
-                                <th>NOMBRE DE USUARIO</th>
-                                <th>PASS</th>
-                                <th>TIPO DE USUARIO</th>
-                                <th>ESTADO </th>
+                                <td>ID USUARIO</td>
+                                <td>NOMBRE DE USUARIO</td>
+                                <td>PASS</td>
+                                <td>TIPO DE USUARIO</td>
+                                <td>ESTADO </td>
                             </tr>
                             
-                        <c:forEach var ="row"  items ="${admin.rows}">
+                        <c:forEach var = "row" items = "${admin.rows}">
                             <form action="procesoSuperUsuario" method="GET">
+                                <tr>
                                 <td><input name="txtId" type="text" readonly="" value="${row.id}"></td>
                                 <td><input name="txtNombre" type="text" readonly="" value="${row.user}"></td>
                                 <td><input name="txtPassword" type="text" readonly="" value="${row.pass}"></td>
-                                <td><input name="txtDescripcionTipo" type="text" readonly="" value="${row.descripcion_tipo}"</td>
-                                <td><input name="txtDescripcionEstado" type="text" readonly="" value="${row.descripcion}"</td>
+                                <td><input name="txtDescripcionTipo" type="text" readonly="" value="${row.descripcion_tipo}"></td>
+                                <td><input name="txtDescripcionEstado" type="text" readonly="" value="${row.descripcion}"></td>
+                                </tr>
                             </form>
+                            
+                            
+                           
                         </c:forEach>
 
                         </table>    
