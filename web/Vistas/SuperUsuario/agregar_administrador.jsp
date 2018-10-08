@@ -14,5 +14,30 @@
     <body>
         <jsp:include page="../../Menú/menuAdministrador.jsp"></jsp:include>
         <h1>Hello World!</h1>
+        <div class="row centered-form">
+            <div class="row">
+                <form action="procesoSuperUsuario" method="GET">
+                    <div class="row">
+                        <div class="col-xs6 col-sm6 col-sm5">
+                            <div class="form-group">
+                                <input type="text" name="txtNombreUsuario" placeholder="Nombre de usuario">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs6 col-sm6 col-sm5">
+                            <div class="form-group">
+                                <input type="password" name="txtPass" placeholder="********">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" name="btnAccion" value="Agregar" class="boton">
+                </form>
+                
+            </div>
+
+        </div>
+
+
     </body>
 </html>
