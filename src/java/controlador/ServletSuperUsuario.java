@@ -7,16 +7,23 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.dao.SuperUsuarioFacade;
+import modelo.dto.SuperUsuario;
+import modelo.dto.TipoSuper;
 
 /**
  *
  * @author Berni
  */
 public class ServletSuperUsuario extends HttpServlet {
+
+    @EJB
+    private SuperUsuarioFacade superUsuarioFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,19 +36,24 @@ public class ServletSuperUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletSuperUsuario</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletSuperUsuario at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String opcion = request.getParameter("btnAccion");
+        
+        if (opcion.equals("Agregar")) {
+            agregar(request, response);
         }
+        if (opcion.equals("Eliminar")) {
+            eliminar(request, response);
+        }
+        if (opcion.equals("Modificar")) {
+            modificar(request, response);
+        }
+        if (opcion.equals("Listar")) {
+            listar(request, response);
+        }
+        if (opcion.equals("Buscar")) {
+            buscar(request, response);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,5 +94,46 @@ public class ServletSuperUsuario extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void agregar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
+        String user=request.getParameter("txtUser");
+        String pass=request.getParameter("txtPass");
+        int tipo=Integer.parseInt(request.getParameter("cboTipo"));
+        int estado=1;
+        
+        if (superUsuarioFacade.existeUsuario(user)) {
+            request.getSession().setAttribute("mensaje","El usuario ya existe");
+            response.sendRedirect("agregar_administrador.jsp");
+        }else{
+            TipoSuper tipoSU=new TipoSuper(tipo);
+            SuperUsuario superU=new SuperUsuario(user, pass, tipoSU);
+            superUsuarioFacade.create(superU);
+            request.getSession().setAttribute("mensaje", "El usuaro se ha creado");
+            response.sendRedirect("index_super.jsp");
+        }
+        
+        
+    }
+
+    private void eliminar(HttpServletRequest request, HttpServletResponse response) {
+        
+        
+        
+    }
+
+    private void modificar(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void listar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        request.getSession().setAttribute("lista", superUsuarioFacade.findAll());
+        response.sendRedirect("listar_admin.jsp");
+    }
+
+    private void buscar(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
