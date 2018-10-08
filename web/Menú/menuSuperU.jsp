@@ -5,34 +5,44 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        
-        
-        
-    </head>
-    <body>
-        <div>
-            <ul>
-                <li> <a href="index_super.jsp">Inicio</a></li>
-                <li> <a href="">Menu SuperUsuario</a>
-                    <span>
-                        <ul>
-                            <li <a href="#">Gestion de SuperUsuarios>
-                                    <ul>
-                                        <li><a href="agregar_administrador.jsp">Agregar Administradores</a></li>
-                                        <li><a href="listar_admin.jsp">Listar Administradores</a></li>
-                                    </ul>
-                            </li>
-                        </ul>
-                    </span>
-                </li>
 
-            </ul>
 
-        </div>
-    </body>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Inicio</a>
+    </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Menu administrador
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="agregar_administrador.jsp">Agregar Administrador</a>
+        <a class="dropdown-item" href="listar_admin.jsp">Listar administradores</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+<br>
+  
+
+
+</body>
 </html>
