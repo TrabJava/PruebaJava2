@@ -107,7 +107,9 @@ public class ServletSuperUsuario extends HttpServlet {
             request.getSession().setAttribute("mensaje","El usuario ya existe");
             response.sendRedirect("Vistas/agregar_administrador.jsp");
         }else{
-            SuperUsuario superU=new SuperUsuario(user, pass);
+            TipoSuper tipoSuper=new TipoSuper(tipo);
+            EstadoSuper estadoSu=new EstadoSuper(estado);
+            SuperUsuario superU=new SuperUsuario(user, pass, tipoSuper, estadoSu);
             superUsuarioFacade.create(superU);
             request.getSession().setAttribute("mensaje", "El usuaro se ha creado");
             response.sendRedirect("Vistas/agregar_administrador.jsp");
