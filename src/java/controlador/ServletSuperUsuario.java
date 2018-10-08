@@ -99,15 +99,14 @@ public class ServletSuperUsuario extends HttpServlet {
         
         String user=request.getParameter("txtUser");
         String pass=request.getParameter("txtPass");
-        int tipo=Integer.parseInt(request.getParameter("cboTipo"));
+        int tipo=2;
         int estado=1;
         
         if (superUsuarioFacade.existeUsuario(user)) {
             request.getSession().setAttribute("mensaje","El usuario ya existe");
             response.sendRedirect("agregar_administrador.jsp");
         }else{
-            TipoSuper tipoSU=new TipoSuper(tipo);
-            SuperUsuario superU=new SuperUsuario(user, pass, tipoSU);
+            SuperUsuario superU=new SuperUsuario(user, pass);
             superUsuarioFacade.create(superU);
             request.getSession().setAttribute("mensaje", "El usuaro se ha creado");
             response.sendRedirect("index_super.jsp");
