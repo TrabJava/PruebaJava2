@@ -35,5 +35,10 @@ public class SuperUsuarioFacade extends AbstractFacade<SuperUsuario> {
         query.setParameter("user", user);
         return query.getResultList().size() > 0;
     }
+     public boolean existeId(int id){
+        Query query = em.createQuery("SELECT u FROM super_usuario u WHERE u.id = :id");
+        query.setParameter("id", id);
+        return query.getResultList().size() > 0;
+    }
     
 }

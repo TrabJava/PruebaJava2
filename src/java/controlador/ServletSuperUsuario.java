@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.dao.SuperUsuarioFacade;
+import modelo.dto.EstadoSuper;
 import modelo.dto.SuperUsuario;
 import modelo.dto.TipoSuper;
 
@@ -115,11 +116,26 @@ public class ServletSuperUsuario extends HttpServlet {
         
     }
 
-    private void eliminar(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String user=request.getParameter("txtUser");
         String pass=request.getParameter("txtPass");
         int tipo=Integer.parseInt(request.getParameter("cboTipo"));
         int estado=Integer.parseInt(request.getParameter("cboTipo"));
+        int id=Integer.parseInt(request.getParameter("cboUsuarios"));
+        
+        if (superUsuarioFacade.existeId(id)) {
+            TipoSuper tipoSuper=new TipoSuper(tipo);
+            EstadoSuper estadoSu=new EstadoSuper(estado);
+            SuperUsuario su=new SuperUsuario(id, user, pass, tipoSuper, estadoSu);
+            superUsuarioFacade.remove(su);
+            request.getSession().setAttribute("mensaje", "El Usuario se Eliminó");
+            response.sendRedirect("Vistas/listar_admin.jsp");
+            
+        }else{
+            request.getSession().setAttribute("mensaje", "El usuario no existe");
+            response.sendRedirect("Vistas/index_super.jsp");
+        }
+        
         
     }
 
