@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="../Menú/menuAdministrador.jsp"></jsp:include>
+        <jsp:include page="../Menú/menuSuperU.jsp"></jsp:include>
     </body>
 </html>
