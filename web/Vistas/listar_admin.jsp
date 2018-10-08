@@ -23,10 +23,10 @@
 
         <%--Query para mostrar los datos en la lista--%>
         <sql:query dataSource = "${snapshot}" var = "admin">
-            SELECT * FROM super_usuario su
-            JOIN tipo_super tu ON su.id=tu.id 
-            JOIN estado_super es ON su.id = es.id  
-            WHERE su.id=2  ;
+            SELECT * FROM super_usuario 
+            JOIN tipo_super ON super_usuario.id=tipo_super.id 
+            JOIN estado_super ON super_usuario.id = estado_super.id  
+            WHERE super_usuario.tipo=2  ;
         </sql:query>
         <jsp:include page="../Menú/menuSuperU.jsp"></jsp:include>
 
@@ -45,7 +45,7 @@
                                 <th>TIPO DE USUARIO</th>
                                 <th>ESTADO </th>
                             </tr>
-                            
+
                         <c:forEach var = "row" items = "${admin.rows}">
                             <form action="procesoSuperUsuario" method="GET">
                                 <td><input name="txtId" type="text" readonly="" value="${row.id}"></td>
@@ -56,13 +56,13 @@
                             </form>
                         </c:forEach>
 
-                        </table>    
-                    </div>
-                    <div class="col-lg-3">
-                    </div>
+                    </table>    
+                </div>
+                <div class="col-lg-3">
                 </div>
             </div>
+        </div>
 
 
-        </body>
-    </html>
+    </body>
+</html>
