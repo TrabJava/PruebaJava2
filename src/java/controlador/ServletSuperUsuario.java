@@ -104,12 +104,12 @@ public class ServletSuperUsuario extends HttpServlet {
         
         if (superUsuarioFacade.existeUsuario(user)) {
             request.getSession().setAttribute("mensaje","El usuario ya existe");
-            response.sendRedirect("agregar_administrador.jsp");
+            response.sendRedirect("Vistas/agregar_administrador.jsp");
         }else{
             SuperUsuario superU=new SuperUsuario(user, pass);
             superUsuarioFacade.create(superU);
             request.getSession().setAttribute("mensaje", "El usuaro se ha creado");
-            response.sendRedirect("index_super.jsp");
+            response.sendRedirect("Vistas/agregar_administrador.jsp");
         }
         
         
@@ -128,7 +128,7 @@ public class ServletSuperUsuario extends HttpServlet {
     private void listar(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         request.getSession().setAttribute("lista", superUsuarioFacade.findAll());
-        response.sendRedirect("listar_admin.jsp");
+        response.sendRedirect("Vistas/listar_admin.jsp");
     }
 
     private void buscar(HttpServletRequest request, HttpServletResponse response) {

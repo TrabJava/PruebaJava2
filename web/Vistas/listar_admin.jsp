@@ -51,9 +51,8 @@
                                 <td><input name="txtId" type="text" readonly="" value="${row.id}"></td>
                                 <td><input name="txtNombre" type="text" readonly="" value="${row.user}"></td>
                                 <td><input name="txtPassword" type="text" readonly="" value="${row.pass}"></td>
-                                <td><input name="txtDescripcionTipo" type="text" readonly="" value="${row.descripcion}"></td>
-                                <td><input name="txtDescripcionEstado" type="text" readonly="" value="${row.descripcion}"></td>
-
+                                <td><input name="txtDescripcionTipo" type="text" readonly="" value="${su.super_usuario.tipo}">${tu.descripcion}></td>
+                                <td><input name="txtDescripcionEstado" type="text" readonly="" value="${su.super_usuario.estado}">${es.descripcion}"></td>
                             </form>
                         </c:forEach>
 
