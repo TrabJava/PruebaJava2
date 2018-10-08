@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="../../Menú/menuAdministrador.jsp"></jsp:include>
+        <jsp:include page="../Menú/menuAdministrador.jsp"></jsp:include>
         <div class="row centered-form">
             <div class="row">
                 <form action="procesoSuperUsuario" method="GET">

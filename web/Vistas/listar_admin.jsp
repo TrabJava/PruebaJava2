@@ -28,7 +28,7 @@
             JOIN estado_super es ON su.id = es.id  
             WHERE su.id=2  ;
         </sql:query>
-        <jsp:include page="../../Menú/menuAdministrador.jsp"></jsp:include>
+        <jsp:include page="../Menú/menuAdministrador.jsp"></jsp:include>
 
 
             <div>
