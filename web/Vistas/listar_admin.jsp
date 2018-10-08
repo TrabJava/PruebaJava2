@@ -23,10 +23,10 @@
 
         <%--Query para mostrar los datos en la lista--%>
         <sql:query dataSource = "${snapshot}" var = "admin">
-            SELECT * FROM super_usuario 
-            JOIN tipo_super ON super_usuario.id=tipo_super.id 
-            JOIN estado_super ON super_usuario.id = estado_super.id  
-            WHERE super_usuario.tipo=2  ;
+            SELECT * FROM super_usuario su
+            JOIN tipo_super tu ON su.tipo=tu.id 
+            JOIN estado_super es ON su.estado= es.id  
+            WHERE su.tipo=2
         </sql:query>
         <jsp:include page="../Menú/menuSuperU.jsp"></jsp:include>
 
@@ -45,24 +45,24 @@
                                 <th>TIPO DE USUARIO</th>
                                 <th>ESTADO </th>
                             </tr>
-
-                        <c:forEach var = "row" items = "${admin.rows}">
+                            
+                        <c:forEach var ="row"  items ="${admin.rows}">
                             <form action="procesoSuperUsuario" method="GET">
                                 <td><input name="txtId" type="text" readonly="" value="${row.id}"></td>
                                 <td><input name="txtNombre" type="text" readonly="" value="${row.user}"></td>
                                 <td><input name="txtPassword" type="text" readonly="" value="${row.pass}"></td>
-                                <td><input name="txtDescripcionTipo" type="text" readonly="" value="${su.super_usuario.tipo}">${tu.descripcion}></td>
-                                <td><input name="txtDescripcionEstado" type="text" readonly="" value="${su.super_usuario.estado}">${es.descripcion}"></td>
+                                <td><input name="txtDescripcionTipo" type="text" readonly="" value="${row.descripcion_tipo}"</td>
+                                <td><input name="txtDescripcionEstado" type="text" readonly="" value="${row.descripcion}"</td>
                             </form>
                         </c:forEach>
 
-                    </table>    
-                </div>
-                <div class="col-lg-3">
+                        </table>    
+                    </div>
+                    <div class="col-lg-3">
+                    </div>
                 </div>
             </div>
-        </div>
 
 
-    </body>
-</html>
+        </body>
+    </html>
