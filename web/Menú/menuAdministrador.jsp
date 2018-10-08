@@ -10,11 +10,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
+        
+        
     </head>
     <body>
         <div>
             <ul>
-                <li <a href="index_SuperUsuario.jsp">Inicio</a></li>
+                <li> <a href="index_super.jsp">Inicio</a></li>
                 <li> <a href="">Menu SuperUsuario</a>
                     <span>
                         <ul>
