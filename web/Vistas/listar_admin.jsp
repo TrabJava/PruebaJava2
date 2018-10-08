@@ -37,7 +37,7 @@
                         <table>
                             <tr>
                                 <td>ID USUARIO</td>
-                                <td>NOMBRE DE USUARIO</td>
+                                <td>NOMBRE USUARIO</td>
                                 <td>PASS</td>
                                 <td>TIPO DE USUARIO</td>
                                 <td>ESTADO </td>
