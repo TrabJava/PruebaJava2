@@ -7,10 +7,12 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.dao.SuperUsuarioFacade;
 
 /**
  *
@@ -19,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class ServletAcceso extends HttpServlet {
+
+    @EJB
+    private SuperUsuarioFacade superUsuarioFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,6 +37,10 @@ public class ServletAcceso extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+          String opcion = request.getParameter("btnAccion");
+          if (opcion.equals("Ingresar")) {
+            ingresar(request, response);
+        }
         
         
     }
@@ -74,5 +83,21 @@ public class ServletAcceso extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void ingresar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+         try {
+            String user= request.getParameter("txtNombreUsuario");
+            String pass= request.getParameter("txtPassword");
+            
+              if (superUsuarioFacade.existeUsuario(user)) {
+                  response.sendRedirect("Vistas/index_admin.jsp");
+              }else{
+                 request.getSession().setAttribute("mensaje", "Credenciales incorrectas");
+                 response.sendRedirect("login.jsp");
+              }
+        } catch (Exception e) {
+             response.sendRedirect("login.jsp");
+        }  
+    }
 
 }
