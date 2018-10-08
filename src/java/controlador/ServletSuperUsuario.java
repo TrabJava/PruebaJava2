@@ -116,13 +116,18 @@ public class ServletSuperUsuario extends HttpServlet {
     }
 
     private void eliminar(HttpServletRequest request, HttpServletResponse response) {
-        
-        
+        String user=request.getParameter("txtUser");
+        String pass=request.getParameter("txtPass");
+        int tipo=Integer.parseInt(request.getParameter("cboTipo"));
+        int estado=Integer.parseInt(request.getParameter("cboTipo"));
         
     }
 
     private void modificar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        
+        
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws IOException {
