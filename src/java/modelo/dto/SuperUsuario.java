@@ -73,6 +73,12 @@ public class SuperUsuario implements Serializable {
         this.pass = pass;
     }
 
+    public SuperUsuario(Integer id, EstadoSuper estado) {
+        this.id = id;
+        this.estado = estado;
+    }
+
+    
     public SuperUsuario(Integer id, String user, String pass, TipoSuper tipo, EstadoSuper estado) {
         this.id = id;
         this.user = user;
