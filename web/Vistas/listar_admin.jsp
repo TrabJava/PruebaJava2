@@ -4,6 +4,7 @@
     Author     : Berni
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%--Para hacer una Consulta directa a la bbd--%>
@@ -34,47 +35,33 @@
         <jsp:include page="../Menú/menuSuperU.jsp"></jsp:include>
 
 
-
-
-            
-   
-
-
-
-
-
-
-
-
-
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-4">
       <h2>Conocelos!</h2>
-      <h5>Photo of me:</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-      <h3>Some Links</h3>
-      <p>Lorem ipsum dolor sit ame.</p>
+      <img src="../img/30818.png" alt="" width="360" height="300"/>
+      <h3>Más Acciones</h3>
+      <p>Eres libre de navegar en tu sitio</p>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
+          <a class="nav-link active" href="#">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Jugadores</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Ligas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link" href="#">Torneos</a>
         </li>
       </ul>
       <hr class="d-sm-none">
     </div>
     <div class="col-sm-8">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2017</h5>
+      <h2>Modifica o Desactiva a los mancos</h2>
+      <h5>Recuerda que toda acción trae consecuencias</h5>
+      <br>
       <div class="container">       
                 <table class="table table-dark" style="width: 800px">
                     <thead>
@@ -97,7 +84,18 @@
                             <td>${row.pass}</td>
                             <td>${row.descripcion_tipo}</td>
                             <td>${row.descripcion}</td>
-                            <td><a href="#" style="color: white">Eliminar</a></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${row.descripcion!='activada'}">
+                                        
+                                        <a  style="color: white">Ya desactivado</a>  
+                                    </c:when>
+                                    <c:when test="${row.descripcion!='desactivada'}">
+                                        <a href="#" style="color: white">Eliminar</a>  
+                                    </c:when>
+                                </c:choose>
+                            </td>
+                                
                             <td><a href="modificar_administrador.jsp?id=${row.id}" id="url" style="color: white"/>Modificar</td>
                         </tr>
                     </form>   
@@ -108,10 +106,9 @@
   </div>
 </div>
 
-<div class="jumbotron text-center" style="margin-bottom:0">
-  <p>Footer</p>
-</div>
-
+        <br><br>
+        
+        <jsp:include page="../Menú/footer.jsp"></jsp:include>
 
 </body>
 </html>
