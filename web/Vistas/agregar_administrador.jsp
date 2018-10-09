@@ -3,6 +3,11 @@
     Created on : 07-10-2018, 20:23:23
     Author     : Berni
 --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,38 +17,69 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="../Menú/menuSuperU.jsp"></jsp:include>
-        <div class="row centered-form" >
-            <div class="col-xs-12 col-sm-8 col-md-5 col-sm-offset-2 col-md-offset-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading"  style="margin-left: 100%;">
-                            <h3 class="panel-title"><strong>Agregar Administrador</strong></h3> 
-                    </div>
-                    <div class="panel-body" style="margin-left: 100%;">
-                        
-                        <form action="procesoSuperUsuario" method="GET">
-                            <div class="row">
-                                <div class="col-xs6 col-sm6 col-sm2" >
-                                    <div class="form-group">
-                                        <input type="text" name="txtNombreUsuario" placeholder="Nombre de usuario">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs6 col-sm6 col-sm5">
-                                    <div class="form-group">
-                                        <input type="password" name="txtPass" placeholder="********">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="submit" name="btnAccion" value="Agregar" class="boton">
-                        </form>
-                    </div>
-                </div>
-            </div>
 
-        </div>
+        <sql:setDataSource var="dataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/liga_nos_vamos?zeroDateTimeBehavior=convertToNull" user="mojaber_ali" password="12345"></sql:setDataSource>
+
+        <sql:query dataSource="${dataSource}" var="tipo">
+            SELECT id, descripcion_tipo FROM tipo_super
+        </sql:query> 
+
+        <sql:query dataSource="${dataSource}" var="estado">
+            SELECT id, descripcion FROM estado_super
+        </sql:query> 
+
+        <jsp:include page="../Menú/menuSuperU.jsp"></jsp:include>
+
+
+
+            <form action="../procesoSuperUsuario" method="POST">
+                <table border="1">
+                    <tbody>
+                        <tr>
+                            <td>USER :</td>
+                            <td><input type="text" name="txtUser" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>PASS :</td>
+                            <td><input type="text" name="txtPass" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO :</td>
+                            <td>
+                                <select name="cboTipo" >
+                                <c:forEach var="tipos" items="${tipo.rows}">
+                                    <option value="${tipos.id}">${tipos.descripcion_tipo}</option>
+                                </c:forEach>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td>ESTADO :</td>
+                        <td>
+                            <select name="cboEstado" >
+                                <c:forEach var="estados" items="${estado.rows}">
+                                    <option value="${estados.id}">${estados.descripcion}</option>
+                                </c:forEach>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <input type="submit" name="btnAccion" value="Agregar" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        ${mensaje}
 
 
     </body>
 </html>
+
+
+
+
+
+
+
+
+
