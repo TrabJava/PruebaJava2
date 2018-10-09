@@ -26,6 +26,8 @@ public class ServletSuperUsuario extends HttpServlet {
     @EJB
     private SuperUsuarioFacade superUsuarioFacade;
 
+   
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -103,8 +105,8 @@ public class ServletSuperUsuario extends HttpServlet {
 
         String user = request.getParameter("txtUser");
         String pass = request.getParameter("txtPass");
-        int tipo = 2;
-        int estado = 1;
+        int tipo = Integer.parseInt(request.getParameter("cboTipo")) ;
+        int estado = Integer.parseInt(request.getParameter("cboEstado")) ;
 
         if (superUsuarioFacade.existeUsuario(user)) {
             request.getSession().setAttribute("mensaje", "El usuario ya existe");
@@ -112,7 +114,7 @@ public class ServletSuperUsuario extends HttpServlet {
         } else {
             TipoSuper tipoSuper = new TipoSuper(tipo);
             EstadoSuper estadoSu = new EstadoSuper(estado);
-            SuperUsuario superU = new SuperUsuario(user, pass, tipoSuper, estadoSu);
+            SuperUsuario superU = new SuperUsuario(null, user, pass, tipoSuper, estadoSu, null);
             superUsuarioFacade.create(superU);
             request.getSession().setAttribute("mensaje", "El usuaro se ha creado");
             response.sendRedirect("Vistas/agregar_administrador.jsp");
