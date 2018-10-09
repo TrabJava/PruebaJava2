@@ -41,6 +41,8 @@
                                 <td>PASS</td>
                                 <td>TIPO DE USUARIO</td>
                                 <td>ESTADO </td>
+                                <td>DESACTIVAR</td>
+                                <td>MODIFICAR</td>
                             </tr>
                             
                         <c:forEach var = "row" items = "${admin.rows}">
@@ -51,11 +53,10 @@
                                 <td><input name="txtPassword" type="text" readonly="" value="${row.pass}"></td>
                                 <td><input name="txtDescripcionTipo" type="text" readonly="" value="${row.descripcion_tipo}"></td>
                                 <td><input name="txtDescripcionEstado" type="text" readonly="" value="${row.descripcion}"></td>
+                                <td><input type="submit" name="btnAccion" value="Desactivar" class="boton"></td>
+                                <td><a href="modificar_administrador.jsp?id=${row.id}" class="btn btn-primary" id="url"/>Modificar</td>
                                 </tr>
-                            </form>
-                            
-                            
-                           
+                            </form>   
                         </c:forEach>
 
                         </table>    
