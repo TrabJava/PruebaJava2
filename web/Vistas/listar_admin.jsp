@@ -12,6 +12,12 @@
 
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
@@ -44,28 +50,28 @@
                                 <td>DESACTIVAR</td>
                                 <td>MODIFICAR</td>
                             </tr>
-                            
+
                         <c:forEach var = "row" items = "${admin.rows}">
                             <form action="procesoSuperUsuario" method="GET">
                                 <tr>
-                                <td><input name="txtId" type="text" readonly="" value="${row.id}"></td>
-                                <td><input name="txtNombre" type="text" readonly="" value="${row.user}"></td>
-                                <td><input name="txtPassword" type="text" readonly="" value="${row.pass}"></td>
-                                <td><input name="txtDescripcionTipo" type="text" readonly="" value="${row.descripcion_tipo}"></td>
-                                <td><input name="txtDescripcionEstado" type="text" readonly="" value="${row.descripcion}"></td>
-                                <td><input type="submit" name="btnAccion" value="Desactivar" class="btn btn-danger"></td>
-                                <td><a href="modificar_administrador.jsp?id=${row.id}" class="btn btn-primary" id="url"/>Modificar</td>
+                                    <td><input name="txtId" type="text" readonly="" value="${row.id}"></td>
+                                    <td><input name="txtNombre" type="text" readonly="" value="${row.user}"></td>
+                                    <td><input name="txtPassword" type="text" readonly="" value="${row.pass}"></td>
+                                    <td><input name="txtDescripcionTipo" type="text" readonly="" value="${row.descripcion_tipo}"></td>
+                                    <td><input name="txtDescripcionEstado" type="text" readonly="" value="${row.descripcion}"></td>
+                                    <td><input type="submit" name="btnAccion" value="Desactivar" class="btn btn-danger"></td>
+                                    <td><a href="modificar_administrador.jsp?id=${row.id}" class="btn btn-primary" id="url"/>Modificar</td>
                                 </tr>
                             </form>   
                         </c:forEach>
 
-                        </table>    
-                    </div>
-                    <div class="col-lg-3">
-                    </div>
+                    </table>    
+                </div>
+                <div class="col-lg-3">
                 </div>
             </div>
+        </div>
 
 
-        </body>
-    </html>
+    </body>
+</html>
