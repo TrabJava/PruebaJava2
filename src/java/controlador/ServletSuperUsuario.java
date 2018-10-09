@@ -38,7 +38,7 @@ public class ServletSuperUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String opcion = request.getParameter("btnAccion");
-        
+
         if (opcion.equals("Agregar")) {
             agregar(request, response);
         }
@@ -54,7 +54,10 @@ public class ServletSuperUsuario extends HttpServlet {
         if (opcion.equals("Buscar")) {
             buscar(request, response);
         }
-        
+        if (opcion.equals("Desactivar")) {
+            actualizar_estado(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -97,73 +100,70 @@ public class ServletSuperUsuario extends HttpServlet {
     }// </editor-fold>
 
     private void agregar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
-        String user=request.getParameter("txtUser");
-        String pass=request.getParameter("txtPass");
-        int tipo=2;
-        int estado=1;
-        
+
+        String user = request.getParameter("txtUser");
+        String pass = request.getParameter("txtPass");
+        int tipo = 2;
+        int estado = 1;
+
         if (superUsuarioFacade.existeUsuario(user)) {
-            request.getSession().setAttribute("mensaje","El usuario ya existe");
+            request.getSession().setAttribute("mensaje", "El usuario ya existe");
             response.sendRedirect("Vistas/agregar_administrador.jsp");
-        }else{
-            TipoSuper tipoSuper=new TipoSuper(tipo);
-            EstadoSuper estadoSu=new EstadoSuper(estado);
-            SuperUsuario superU=new SuperUsuario(user, pass, tipoSuper, estadoSu);
+        } else {
+            TipoSuper tipoSuper = new TipoSuper(tipo);
+            EstadoSuper estadoSu = new EstadoSuper(estado);
+            SuperUsuario superU = new SuperUsuario(user, pass, tipoSuper, estadoSu);
             superUsuarioFacade.create(superU);
             request.getSession().setAttribute("mensaje", "El usuaro se ha creado");
             response.sendRedirect("Vistas/agregar_administrador.jsp");
         }
-        
-        
+
     }
 
     private void eliminar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String user=request.getParameter("txtUser");
-        String pass=request.getParameter("txtPass");
-        int tipo=Integer.parseInt(request.getParameter("cboTipo"));
-        int estado=Integer.parseInt(request.getParameter("cboTipo"));
-        int id=Integer.parseInt(request.getParameter("cboUsuarios"));
-        
+        String user = request.getParameter("txtUser");
+        String pass = request.getParameter("txtPass");
+        int tipo = Integer.parseInt(request.getParameter("cboTipo"));
+        int estado = Integer.parseInt(request.getParameter("cboTipo"));
+        int id = Integer.parseInt(request.getParameter("cboUsuarios"));
+
         if (superUsuarioFacade.existeId(id)) {
-            TipoSuper tipoSuper=new TipoSuper(tipo);
-            EstadoSuper estadoSu=new EstadoSuper(estado);
-            SuperUsuario su=new SuperUsuario(id, user, pass, tipoSuper, estadoSu);
+            TipoSuper tipoSuper = new TipoSuper(tipo);
+            EstadoSuper estadoSu = new EstadoSuper(estado);
+            SuperUsuario su = new SuperUsuario(id, user, pass, tipoSuper, estadoSu);
             superUsuarioFacade.remove(su);
             request.getSession().setAttribute("mensaje", "El Usuario se Eliminó");
             response.sendRedirect("Vistas/listar_admin.jsp");
-            
-        }else{
+
+        } else {
             request.getSession().setAttribute("mensaje", "El usuario no existe");
             response.sendRedirect("Vistas/index_super.jsp");
         }
-        
-        
+
     }
 
     private void modificar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
-        String user=request.getParameter("txtUser");
-        String pass=request.getParameter("txtPass");
-        int tipo=Integer.parseInt(request.getParameter("cboTipo"));
-        int estado=Integer.parseInt(request.getParameter("cboTipo"));
-        int id=Integer.parseInt(request.getParameter("cboUsuarios"));
-        
+
+        String user = request.getParameter("txtUser");
+        String pass = request.getParameter("txtPass");
+        int tipo = Integer.parseInt(request.getParameter("cboTipo"));
+        int estado = Integer.parseInt(request.getParameter("cboTipo"));
+        int id = Integer.parseInt(request.getParameter("txtId"));
+
         if (superUsuarioFacade.existeId(id)) {
-            TipoSuper tipoSuper=new TipoSuper(tipo);
-            EstadoSuper estadoSu=new EstadoSuper(estado);
-            SuperUsuario su=new SuperUsuario(id, user, pass, tipoSuper, estadoSu);
+            TipoSuper tipoSuper = new TipoSuper(tipo);
+            EstadoSuper estadoSu = new EstadoSuper(estado);
+            SuperUsuario su = new SuperUsuario(id, user, pass, tipoSuper, estadoSu);
             superUsuarioFacade.remove(su);
             superUsuarioFacade.create(su);
             request.getSession().setAttribute("mensaje", "El Usuario se Modificó");
             response.sendRedirect("Vistas/listar_admin.jsp");
-            
-        }else{
+
+        } else {
             request.getSession().setAttribute("mensaje", "El usuario no existe");
             response.sendRedirect("Vistas/index_super.jsp");
         }
-        
-        
+
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -174,6 +174,25 @@ public class ServletSuperUsuario extends HttpServlet {
 
     private void buscar(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void actualizar_estado(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int estado = 2;
+        int id = Integer.parseInt(request.getParameter("txtId"));
+
+        if (superUsuarioFacade.existeId(id)) {
+            EstadoSuper estadoSu = new EstadoSuper(estado);
+            SuperUsuario su = new SuperUsuario(id, estadoSu);
+            superUsuarioFacade.remove(su);
+            superUsuarioFacade.create(su);
+            request.getSession().setAttribute("mensaje", "El Usuario se ha desactivado");
+            response.sendRedirect("Vistas/listar_admin.jsp");
+
+        } else {
+            request.getSession().setAttribute("mensaje", "El usuario no existe");
+            response.sendRedirect("Vistas/index_super.jsp");
+        }
+
     }
 
 }
