@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.dao.SuperUsuarioFacade;
+import modelo.dto.SuperUsuario;
 
 /**
  *
@@ -89,7 +90,10 @@ public class ServletAcceso extends HttpServlet {
             String user= request.getParameter("txtNombreUsuario");
             String pass= request.getParameter("txtPassword");
             
-              if (superUsuarioFacade.existeUsuario(user)) {
+            SuperUsuario superuser = new SuperUsuario(user, pass);
+            
+            SuperUsuario aux=superUsuarioFacade.ingresar(superuser.getUser(), superuser.getPass());
+              if (aux.getTipo().getDescripcionTipo().equals("super_usuario")) {
                   response.sendRedirect("Vistas/index_admin.jsp");
               }else{
                  request.getSession().setAttribute("mensaje", "Credenciales incorrectas");
