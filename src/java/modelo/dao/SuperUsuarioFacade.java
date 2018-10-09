@@ -18,7 +18,7 @@ import modelo.dto.SuperUsuario;
 @Stateless
 public class SuperUsuarioFacade extends AbstractFacade<SuperUsuario> {
 
-    @PersistenceContext(unitName = "TrabajoJava2PU")
+    @PersistenceContext(unitName = "TrabajoJava2")
     private EntityManager em;
 
     @Override
@@ -40,6 +40,7 @@ public class SuperUsuarioFacade extends AbstractFacade<SuperUsuario> {
         query.setParameter("id", id);
         return query.getResultList().size() > 0;
     }
+     
      
     
 }
