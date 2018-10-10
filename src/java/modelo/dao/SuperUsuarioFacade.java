@@ -41,6 +41,12 @@ public class SuperUsuarioFacade extends AbstractFacade<SuperUsuario> {
         return query.getResultList().size() > 0;
     }
      
+     public boolean ingresar(String user, String pass){
+        Query query = em.createQuery("SELECT u FROM super_usuario u WHERE u.user = :user and u.pass = :pass");
+        query.setParameter("user", user);
+        query.setParameter("pass", pass);
+        return query.getResultList().size() > 0;
+    }
      
     
 }
