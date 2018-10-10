@@ -90,15 +90,12 @@ public class ServletAcceso extends HttpServlet {
             String user= request.getParameter("txtNombreUsuario");
             String pass= request.getParameter("txtPassword");
             
-            SuperUsuario superuser = new SuperUsuario(user, pass);
-            
-            SuperUsuario aux=superUsuarioFacade.ingresar(superuser.getUser(), superuser.getPass());
-              if (aux.getTipo().getDescripcionTipo().equals("super_usuario")) {
-                  response.sendRedirect("Vistas/index_admin.jsp");
-              }else{
-                 request.getSession().setAttribute("mensaje", "Credenciales incorrectas");
-                 response.sendRedirect("login.jsp");
-              }
+            if (superUsuarioFacade.ingresar(user, pass)) {
+            SuperUsuario superusuario = new SuperUsuario(user, pass);
+        } else {
+            request.getSession().setAttribute("mensaje", "credenciales incorrectas");
+            response.sendRedirect("login.jsp");
+        }
         } catch (Exception e) {
              response.sendRedirect("login.jsp");
         }  
